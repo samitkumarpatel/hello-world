@@ -17,4 +17,5 @@ jobs:
       - name: push package
         run: ./mvnw -B -s settings.xml clean deploy
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
