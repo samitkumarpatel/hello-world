@@ -14,8 +14,7 @@ jobs:
           java-version: '17'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          ./mvnw -B -s settings.xml clean deploy
+      - name: push package
+        run: ./mvnw -B -s settings.xml clean deploy
         env:
-          USERNAME: ${{ github.actor }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
