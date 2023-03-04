@@ -14,6 +14,5 @@ jobs:
           java-version: '17'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: compile-push
-        run: |
+      - run: |
           ./mvnw clean deploy
