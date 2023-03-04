@@ -15,4 +15,4 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          ./mvnw clean deploy
+          ./mvnw -B clean deploy
