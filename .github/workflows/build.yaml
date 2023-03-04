@@ -15,4 +15,7 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          ./mvnw -B clean deploy
+          ./mvnw -B -s settings.xml clean deploy
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
