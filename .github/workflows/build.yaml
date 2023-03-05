@@ -7,7 +7,7 @@ permissions:
   contents: read
   packages: write
 jobs:
-  compile-test-upload:
+  upload-JAR:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,6 +22,16 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  upload-IMAGE:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -36,11 +46,14 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDDHHmm'}}
+      - name: debug
+        run: |
+          echo ${{ steps.meta.outputs }}
       - name: native image build
         run: |
           ./mvnw -B \
               -s settings.xml \
               spring-boot:build-image \
               -Pnative \
-              -Dspring-boot.build-image.imageName=ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.tags }}
+              -Dspring-boot.build-image.imageName=ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.tags[0] }}
       - run: docker images -a
