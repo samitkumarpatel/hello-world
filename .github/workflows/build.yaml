@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: read
+  packages: write
 jobs:
   compile-test-upload:
     runs-on: ubuntu-latest
