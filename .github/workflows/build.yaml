@@ -47,13 +47,15 @@ jobs:
           tags: |
             type=schedule,pattern={{date 'YYYYMMDDHHmm'}}
       - name: debug
+        continue-on-error: true
         run: |
-          echo ${{ steps.meta.outputs }}
+          echo ${{ fromJSON(steps.meta.outputs) }}
       - name: native image build
         run: |
+          VERSION=$(date "+%Y%m%d%H%M%S")
           ./mvnw -B \
               -s settings.xml \
               spring-boot:build-image \
               -Pnative \
-              -Dspring-boot.build-image.imageName=ghcr.io/${{ github.repository }}:${{ steps.meta.outputs.tags[0] }}
+              -Dspring-boot.build-image.imageName=ghcr.io/${{ github.repository }}:$VERSION
       - run: docker images -a
