@@ -55,8 +55,12 @@ jobs:
     needs: [upload-JAR,upload-IMAGE]
     steps:
       - uses: actions/checkout@v3
-      - run: |
+      - name: Git tag
+        fail-on-error: true
+        run: |
           VERSION=$(date "+%Y%m%d")
+          git config --global user.email "samitkumarpatel@gmail.com"
+          git config --global user.name "${{ github.actor }}"
           git tag -a v$VERSION -m "Tag version $VERSION"
           git tag
           git push origin v$VERSION
