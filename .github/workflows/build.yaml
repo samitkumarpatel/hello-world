@@ -48,4 +48,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           docker images -a
-          docker push ghcr.io/${{ github.repository }}
+          docker push -a ghcr.io/${{ github.repository }}
