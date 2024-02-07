@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: @project.name@
+    version: @project.version@
+
+management:
+  endpoint:
+    health:
+      enabled: on
