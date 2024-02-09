@@ -4,6 +4,7 @@ spring:
     version: @project.version@
 
 management:
-  endpoint:
-    health:
-      enabled: on
+  endpoints:
+    web:
+      exposure:
+        include: "*"
