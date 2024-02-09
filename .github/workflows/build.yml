@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
@@ -26,6 +26,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Github Release
-      run: gh release create v1.0.0
+      run: gh release create v1.0.0 ./target/*.jar
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
