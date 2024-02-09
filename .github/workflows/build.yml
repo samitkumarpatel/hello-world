@@ -26,7 +26,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Github Release
-      run: |
-        gh release create v1.0.0 ./target/*.jar
+      run: gh release create v1.0.0
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
