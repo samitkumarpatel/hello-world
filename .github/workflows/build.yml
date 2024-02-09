@@ -19,7 +19,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
       - name: Generate native image
-        if: matrix.os == 'ubuntu-latest'
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
@@ -33,7 +32,6 @@ jobs:
           
           docker images -a
       - name: Login to GitHub Container Registry
-        if: matrix.os == 'ubuntu-latest'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
