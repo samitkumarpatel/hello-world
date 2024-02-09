@@ -21,7 +21,12 @@ jobs:
         distribution: 'temurin'
         server-id: github
 
-    - name: Publish to GitHub Packages
+    - name: Publish maven artifact to GitHub Packages
       run: mvn -B deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Github Release
+      run: |
+        gh release create v1.0.0 ./target/*.jar
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
