@@ -4,6 +4,10 @@ spring:
     version: @project.version@
 
 management:
+  jmx:
+    metrics:
+      export:
+        enabled: true
   endpoints:
     web:
       exposure:
