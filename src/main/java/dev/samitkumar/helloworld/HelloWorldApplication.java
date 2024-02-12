@@ -41,7 +41,7 @@ public class HelloWorldApplication {
 					listOfArrays = new ArrayList<>();
 
 					while(listOfArrays.size() < 500) {
-						listOfArrays.add(new byte[512 * 256]);
+						listOfArrays.add(new byte[512 * 512]);
 					}
 
 					// Sleep for a short period to slow down the process
