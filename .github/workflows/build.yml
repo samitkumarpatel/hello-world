@@ -80,13 +80,12 @@ jobs:
 
     - name: Publish maven artifact to GitHub Packages
       run: |
-        #./mvnw -B native:compile
-        
+        ./mvnw native:compile -Pnative
         ./mvnw -B deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Github Release
-      run: gh release create v1.0.${{github.run_number}} ./target/*.jar
+      run: gh release create v2.0.${{github.run_number}} ./target/*.jar ./target/${{github.event.repository.name}}
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
